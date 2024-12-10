@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import org.bukkit.inventory.EquipmentSlot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,12 +84,17 @@ public class FishingSetupCommand implements CommandExecutor, Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
+        if (event.getHand() != EquipmentSlot.HAND) {
+            return; // Ignore off-hand interactions
+        }
+
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
         if (item != null && item.getType() == Material.FISHING_ROD) {
             switch (event.getAction()) {
                 case RIGHT_CLICK_AIR:
-                    event.setCancelled(true);
+                case RIGHT_CLICK_BLOCK:
+                    event.setCancelled(true); // Cancel the default right-click action
                     startCasting(player);
                     break;
                 case LEFT_CLICK_AIR:
