@@ -1,0 +1,17 @@
+name: RealFishing
+version: '1.0-SNAPSHOT'
+main: serwer.realFishing.RealFishing
+api-version: '1.21'
+commands:
+  zestaw:
+    description: Command for fishing setup
+  wedka:
+    description: Command related to fishing rods
+  kolowrotek:
+    description: Command related to reels
+  zylka:
+    description: Command related to fishing lines
+  haczyk:
+    description: Command related to hooks
+  przyneta:
+    description: Command related to baits
